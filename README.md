@@ -1,1 +1,1 @@
-# Microstake
+# ETHLend Microstaking economy model
