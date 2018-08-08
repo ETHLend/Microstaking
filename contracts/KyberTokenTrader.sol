@@ -15,7 +15,7 @@ contract KyberTokenTrader is TokenTrader{
  
     }
 
-    function tradeTokens(ERC20 _token, address _destinationAddress) public payable returns(uint noOfTokens) {
+    function tradeTokens(ERC20 _token, address _destinationAddress) external payable returns(uint noOfTokens) {
         
         
        uint maxDestAmount = 2**256 - 1;

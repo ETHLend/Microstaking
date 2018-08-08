@@ -1,0 +1,367 @@
+{
+  "contractName": "TokenTrader",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "name": "_destinationAddress",
+          "type": "address"
+        }
+      ],
+      "name": "tradeTokens",
+      "outputs": [
+        {
+          "name": "noOfTokens",
+          "type": "uint256"
+        }
+      ],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "\npragma solidity ^0.4.18;\n\nimport \"../base/token/ERC20.sol\";\n\n\ncontract TokenTrader{\n\n    function tradeTokens(ERC20 token,address _destinationAddress) external payable returns(uint noOfTokens);\n\t\n}",
+  "sourcePath": "C:\\Users\\Emilio\\Documents\\GitHub\\Microstaking\\contracts\\interfaces\\tokentrader.sol",
+  "ast": {
+    "absolutePath": "/C/Users/Emilio/Documents/GitHub/Microstaking/contracts/interfaces/tokentrader.sol",
+    "exportedSymbols": {
+      "TokenTrader": [
+        1565
+      ]
+    },
+    "id": 1566,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1554,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".18"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1:24:13"
+      },
+      {
+        "absolutePath": "/C/Users/Emilio/Documents/GitHub/Microstaking/contracts/base/token/ERC20.sol",
+        "file": "../base/token/ERC20.sol",
+        "id": 1555,
+        "nodeType": "ImportDirective",
+        "scope": 1566,
+        "sourceUnit": 1280,
+        "src": "27:33:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1565,
+        "linearizedBaseContracts": [
+          1565
+        ],
+        "name": "TokenTrader",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1564,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "tradeTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1560,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1557,
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "111:11:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$1279",
+                    "typeString": "contract ERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1556,
+                    "name": "ERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1279,
+                    "src": "111:5:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$1279",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1559,
+                  "name": "_destinationAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "123:27:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1558,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "123:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "110:41:13"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 1563,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1562,
+                  "name": "noOfTokens",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "177:15:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1561,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:4:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "176:17:13"
+            },
+            "scope": 1565,
+            "src": "90:104:13",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1566,
+        "src": "63:135:13"
+      }
+    ],
+    "src": "1:197:13"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/Emilio/Documents/GitHub/Microstaking/contracts/interfaces/tokentrader.sol",
+    "exportedSymbols": {
+      "TokenTrader": [
+        1565
+      ]
+    },
+    "id": 1566,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1554,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".18"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "1:24:13"
+      },
+      {
+        "absolutePath": "/C/Users/Emilio/Documents/GitHub/Microstaking/contracts/base/token/ERC20.sol",
+        "file": "../base/token/ERC20.sol",
+        "id": 1555,
+        "nodeType": "ImportDirective",
+        "scope": 1566,
+        "sourceUnit": 1280,
+        "src": "27:33:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1565,
+        "linearizedBaseContracts": [
+          1565
+        ],
+        "name": "TokenTrader",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1564,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "tradeTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1560,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1557,
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "111:11:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ERC20_$1279",
+                    "typeString": "contract ERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1556,
+                    "name": "ERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1279,
+                    "src": "111:5:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ERC20_$1279",
+                      "typeString": "contract ERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1559,
+                  "name": "_destinationAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "123:27:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1558,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "123:7:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "110:41:13"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 1563,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1562,
+                  "name": "noOfTokens",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1564,
+                  "src": "177:15:13",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1561,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:4:13",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "176:17:13"
+            },
+            "scope": 1565,
+            "src": "90:104:13",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1566,
+        "src": "63:135:13"
+      }
+    ],
+    "src": "1:197:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-08-08T13:26:28.199Z"
+}

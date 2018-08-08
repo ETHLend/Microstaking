@@ -7,61 +7,61 @@ import "./interfaces/tokentrader.sol";
 
 contract StakingContract {
 
-using SafeMath for uint96;
-using SafeMath for uint;
+  using SafeMath for uint96; 
+  using SafeMath for uint;
+
+  uint constant  REWARD_PERCENTAGE = 5;
+  uint constant  WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
  
- uint constant  REWARD_PERCENTAGE = 5;
- uint constant  WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
- 
- struct UserStakeData{
+  struct UserStakeData{
     
     uint96 currentStakeAmount;
     uint96 totalSentAmount;
     uint64 stakeUnlockDate;
     uint32 lastRewardRoundWithdrawn;
     mapping(uint32 => uint96) amountsHistory;
- }
+  }
  
- struct RewardData{
+  struct RewardData{
      
-     uint totalReward;
-     uint totalEthReceived;
-     uint rewardDate;
- }
+    uint totalReward;
+    uint totalEthReceived;
+    uint rewardDate;
+  }
  
- mapping (address => UserStakeData) userStakes;
+  mapping (address => UserStakeData) userStakes;
 
- mapping (uint => RewardData) rewards;
+  mapping (uint => RewardData) rewards;
 
- uint32 rewardRoundNumber = 0;
+  uint32 rewardRoundNumber = 0;
  
- uint public totalEthReceived = 0;
+  uint public totalEthReceived = 0;
  
- uint public totalTokenLockedAmount = 0;
+  uint public totalTokenLockedAmount = 0;
  
- uint public currentRewardAmount = 0;
+  uint public currentRewardAmount = 0;
   
- uint public lastRewardDistributionDate;
+  uint public lastRewardDistributionDate;
 
- ERC20 public token ;
+  ERC20 public token ;
  
- TokenTrader tokenTrader;
+  TokenTrader tokenTrader;
   
 
-constructor(address _tokenAddress, address _tokenTraderAddress) public {
+  constructor(address _tokenAddress, address _tokenTraderAddress) public {
 
         // Check inputs
-        require(_tokenAddress != address(0));
-        require(_tokenTraderAddress != address(0));
+    require(_tokenAddress != address(0));
+    require(_tokenTraderAddress != address(0));
 
-        token = ERC20(_tokenAddress);
-        tokenTrader = TokenTrader(_tokenTraderAddress);
+    token = ERC20(_tokenAddress);
+    tokenTrader = TokenTrader(_tokenTraderAddress);
      
-}
+  }
 
 
- function claimRewards() public{
-     
+function claimRewards() public{
+    
      UserStakeData storage data = userStakes[msg.sender];
 
      for(uint32 i=data.lastRewardRoundWithdrawn; i < rewardRoundNumber; i++ ){
