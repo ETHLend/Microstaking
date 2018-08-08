@@ -3,6 +3,7 @@ pragma solidity ^0.4.18;
 
 import "./vendor/KyberNetwork.sol";
 import "./base/math/SafeMath.sol";
+import "./interfaces/tokentrader.sol";
 
 contract StakingContract {
 
@@ -43,19 +44,19 @@ using SafeMath for uint;
  uint public lastRewardDistributionDate;
 
  ERC20 public token ;
-  
- KyberNetworkProxy public kyberContract ;
+ 
+ TokenTrader tokenTrader;
   
 
-constructor(address _tokenAddress, address _kyberContract) public {
+constructor(address _tokenAddress, address _tokenTraderAddress) public {
 
         // Check inputs
         require(_tokenAddress != address(0));
-        require(_kyberContract != address(0));
+        require(_tokenTraderAddress != address(0));
 
         token = ERC20(_tokenAddress);
-        kyberContract = KyberNetworkProxy(_kyberContract);
-    
+        tokenTrader = TokenTrader(_tokenTraderAddress);
+     
 }
 
 
@@ -86,18 +87,21 @@ constructor(address _tokenAddress, address _kyberContract) public {
      
     require(stakeData.currentStakeAmount > 0);
      
-    token.approve(this, stakeData.currentStakeAmount);
      
     uint amountToWitdraw = stakeData.currentStakeAmount;
      
     if(stakeData.stakeUnlockDate >= now)
         amountToWitdraw  = amountToWitdraw.sub(amountToWitdraw.mul(WITHDRAWING_WHILE_ACTIVE_PENALTY).div(100));
-    
-    token.transferFrom(this, msg.sender, amountToWitdraw);
-     
+
     totalTokenLockedAmount.sub(stakeData.currentStakeAmount);
+ 
+    
     stakeData.currentStakeAmount = 0;
     stakeData.totalSentAmount = 0;
+
+    token.approve(this, amountToWitdraw);
+    token.transferFrom(this, msg.sender, amountToWitdraw);
+     
  }
 
  
@@ -108,11 +112,16 @@ constructor(address _tokenAddress, address _kyberContract) public {
     
     UserStakeData storage data = userStakes[msg.sender];
 
+
+    if(data.totalSentAmount == 0)
+        data.lastRewardRoundWithdrawn= rewardRoundNumber;
+        
     data.totalSentAmount += uint96(msg.value);
     data.amountsHistory[rewardRoundNumber] =  data.totalSentAmount;
 
     data.stakeUnlockDate = uint64(now);
  
+    
  }
  
  function calculateGlobalStakeSize() view public returns(uint size){
@@ -143,40 +152,9 @@ constructor(address _tokenAddress, address _kyberContract) public {
 
     totalEthReceived=totalEthReceived+this.balance;
 
-    uint ethToConvert = this.balance;
    
-    uint maxDestAmount = 2**256 - 1;
-
-    // Set minConversionRate to 1 
-    // A value of 1 will execute the trade according to market price in the time of the transaction confirmation
-    uint minConversionRate =   1;
-
-
-        // Convert the ETH to ERC20
-        uint convertedTokens = kyberContract.trade.value(ethToConvert)(
-            // Source. From Kyber docs, this value denotes ETH
-            ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee),
-            
-            // Source amount
-            ethToConvert,
-
-            // Destination. 
-            token,
-            
-            // destAddress: this contract
-            this,
-            
-            // maxDestAmount
-            maxDestAmount,
-            
-            // minConversionRate 
-            minConversionRate,
-            
-            // walletId
-            0
-        );     
-        
-
+    tokenTrader.tradeTokens.value(this.balance)(token, this);
+    
  }
  
  
