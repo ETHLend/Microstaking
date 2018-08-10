@@ -4,7 +4,7 @@ pragma solidity ^0.4.18;
 import "./vendor/KyberNetwork.sol";
 import "./base/math/SafeMath.sol";
 import "./interfaces/tokentrader.sol";
-import "./StakingContractlibrary.sol";
+import "./StakingLibrary.sol";
 
 
 contract StakingContract {
@@ -119,14 +119,14 @@ function claimRewards() public{
  }
 
  
- function receive() external payable{
+  function receive() external payable{
  
     require(msg.value > 0);
     
     StakingLibrary.UserStakeData storage userData = userStakes[msg.sender];
 
     if(userData.totalSentAmount == 0)
-        userData.lastRewardRoundClaimed= rewardRoundNumber;
+        userData.lastRewardRoundClaimed = rewardRoundNumber;
         
     userData.totalSentAmount += uint96(msg.value);
     userData.activeUntilDate = uint64(now + 90 days);
@@ -140,13 +140,13 @@ function claimRewards() public{
     
  }
  
- function calculateGlobalStakeSize() view public returns(uint size){
+  function calculateGlobalStakeSize() public view returns(uint size){
      
-     size = token.balanceOf(this) - totalTokenLockedAmount;
- }
+    size = token.balanceOf(this) - totalTokenLockedAmount;
+  }
  
- 
- function generateReward() public {
+
+  function generateReward() public {
      
     uint currentGlobalStakeSize = calculateGlobalStakeSize();
     
@@ -161,38 +161,39 @@ function claimRewards() public{
     totalTokenLockedAmount += rewardAmount;
     
     ++rewardRoundNumber;
- } 
+  } 
  
 
- function convert() public{
+  function convert() public{
 
 
     tokenTrader.tradeTokens.value(address(this).balance)(token, this);
 
-    totalEthReceived=totalEthReceived.add(address(this).balance);
+    totalEthReceived = totalEthReceived.add(address(this).balance);
     
- }
+  }
  
  
- function getUnclaimedRewards() public view returns(uint total, uint numOfUnpaidRewards){
+  function getUnclaimedRewards() public view returns(uint total, uint numOfUnpaidRewards){
      
          
-     StakingLibrary.UserStakeData storage data = userStakes[msg.sender];
+    StakingLibrary.UserStakeData storage data = userStakes[msg.sender];
      
-     for(uint32 i=data.lastRewardRoundClaimed; i < rewardRoundNumber; i++ ){
+    for(uint32 i = data.lastRewardRoundClaimed; i < rewardRoundNumber; i++ ){
          
          
-         StakingLibrary.UserHistoryData storage historyEntry  = data.history[i];
+      StakingLibrary.UserHistoryData storage historyEntry = data.history[i];
          
-         StakingLibrary.RewardData storage dataForRound = rewards[i];
+      StakingLibrary.RewardData storage dataForRound = rewards[i];
          
-         uint reward = historyEntry.amount.div(dataForRound.totalEthReceived).mul(dataForRound.totalReward);
-         
-         total+=reward;
-     }
+      uint reward = historyEntry.amount.div(dataForRound.totalEthReceived).mul(dataForRound.totalReward);
+
+      total = total.add(reward);
+
+    }
      
-     numOfUnpaidRewards = rewardRoundNumber-data.lastRewardRoundClaimed;
- }
+    numOfUnpaidRewards = rewardRoundNumber-data.lastRewardRoundClaimed;
+  }
  
  
  function getCurrentRewardRound() public view returns(uint32){
