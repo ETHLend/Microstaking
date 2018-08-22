@@ -13,7 +13,7 @@ contract StakingContract {
   using SafeMath for uint;
 
   uint constant  REWARD_PERCENTAGE = 5;
-  uint constant  REWARD_ROUND_DURATION = 6;
+  uint constant  REWARD_ROUND_DURATION = 120; //Reward generation interval in days
   
   uint constant  WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
  
@@ -30,6 +30,7 @@ contract StakingContract {
 
   
   uint public lastRewardDistributionDate;
+  uint public nextRewardDate;
 
   ERC20 public token;
  
@@ -135,19 +136,20 @@ function claimRewards() public{
     
     historyEntry.amount = userData.totalSentAmount;
     historyEntry.activeDate = userData.activeUntilDate;
-
-
-    
+   
  }
  
   function calculateGlobalStakeSize() public view returns(uint size){
      
     size = token.balanceOf(this) - totalTokenLockedAmount;
+  
   }
  
 
   function generateReward() public {
-     
+    
+    require(now > nextRewardDate);
+
     uint currentGlobalStakeSize = calculateGlobalStakeSize();
     
     uint rewardAmount = currentGlobalStakeSize.mul(REWARD_PERCENTAGE).div(100);
@@ -161,6 +163,8 @@ function claimRewards() public{
     totalTokenLockedAmount += rewardAmount;
     
     ++rewardRoundNumber;
+    nextRewardDate = calculateNextRewardDate();
+    
   } 
  
 
@@ -223,6 +227,14 @@ function getTotalRewardsForRound(uint32 index) public view returns (uint rewardA
      
  }
 
+
+
+  function calculateNextRewardDate() internal pure returns(uint){
+      
+      uint currentDate = now;
+
+      return currentDate+(60*60*24*REWARD_ROUND_DURATION);
+  }
     
     
 }
