@@ -71,6 +71,15 @@ The withdraw of the stake can be done by the users using the [`withdrawStake()`]
 
 ## API Reference
 
+### `StakingLibrary`
+
+Defines the data structures needed to keep track of the reward rounds, the stakes of the users and the history data of the users.
+
+#### 1. `UserStakeData`
+#### 2. `UserHistoryData`
+#### 3. `RewardData`
+
+
 ## Basic terminology
 
 ## GAS Cost analysis
