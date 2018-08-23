@@ -21,7 +21,6 @@ Table of contents
         * [`generateReward()`](#generatereward)
         * [`claimRewards()`](#claimrewards)
         * [`withdrawStake()`](#withdrawstake)
-      * [`TokenTrader`](#tokentrader)
       * [`KyberTokenTrader`](#kybertokentrader)
    * [Basic terminology](#basic-terminology)
    * [GAS Cost analysis](#gas-cost-analysis)
@@ -55,7 +54,8 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 ![Optional Text](../master/assets/collection.png)
 
 First step of the model is collecting the payments. Payments are sent to the staking smart contract (please refere to the `StakingContract` in the [API Reference](#api-reference) section) using the [`receive()`](#receive) function. The function stores the ETH received into the smart contract, and keeps track of the data of the user (total amount of ETH received, active date).
-The conversion from ETH to LEND is performed by the [`convert()`](#convert) fuction, that calls the Kyber network `trade()` method.
+The conversion from ETH to LEND is performed by the [`convert()`](#convert) fuction, that calls the Kyber network `trade()` method through the `KyberTokenTrader` smart contract.
+
 The smart contract keeps track of the global stake deposit through the `calculateGlobalStakeSize()` method.
 
 #### 2. Generating, staking and claiming the rewards
@@ -79,6 +79,21 @@ Defines the data structures needed to keep track of the reward rounds, the stake
 #### 2. `UserHistoryData`
 #### 3. `RewardData`
 
+### `StakingContract`
+
+The core of the model. Keeps track of the ETH received, converts to the ERC20 Token and calculates the rewards for the users. By calling this smart contract users are able to claim their rewards and withdraw their stakes.
+
+#### 1. `receive()`
+#### 2. `convert()`
+#### 3. `generateReward()`
+#### 4. `claimRewards()`
+#### 5. `withdrawStake()`
+
+### KyberTokenTrader
+
+Converts the ETH sent to ERC20 token
+
+#### 4. `tradeTokens()`
 
 ## Basic terminology
 
