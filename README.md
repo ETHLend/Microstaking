@@ -13,6 +13,11 @@ Table of contents
           * [Collecting, converting and staking the payments](#1-collecting-converting-and-staking-the-payments)
           * [Generating, staking and claiming the rewards](#2-generating-staking-and-claiming-the-rewards)
           * [Withdraw the rewards](#3-withdraw-the-rewards)
+   * [API Reference] (#api-reference)
+   * [Basic terminology] (#basic-terminology)
+   * [GAS Cost analysis] (#gas-cost-analysis)
+   * [Model symulation examples] (#model-symulation-examples)
+   
    
 <!--te-->
 
