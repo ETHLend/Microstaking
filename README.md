@@ -45,6 +45,7 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 
 ![Optional Text](../master/assets/collection.png)
 
+First step of the model is collecting the payments. Payments are sent to the staking smart contract (please refere to the `StakingContract` in the [API Reference](#api-reference) section) using the `receive()` function.
 
 #### 2. Generating, staking and claiming the rewards
 
