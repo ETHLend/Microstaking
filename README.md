@@ -16,7 +16,7 @@ Table of contents
    * [API Reference] (#api-reference)
    * [Basic terminology] (#basic-terminology)
    * [GAS Cost analysis] (#gas-cost-analysis)
-   * [Model symulation examples] (#model-symulation-examples)
+   * [Model simulation examples] (#model-simulation-examples)
    
    
 <!--te-->
@@ -55,4 +55,11 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 ![Optional Text](../master/assets/withdraw.png)
 
 
+## API Reference
+
+## Basic terminology
+
+## GAS Cost estimation
+
+## Model simulation examples
 
