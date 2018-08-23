@@ -3,19 +3,20 @@ pragma solidity ^0.4.18;
 
 import "./vendor/KyberNetwork.sol";
 import "./base/math/SafeMath.sol";
+import "./base/ownership/Ownable.sol";
 import "./interfaces/tokentrader.sol";
 import "./StakingLibrary.sol";
 
 
-contract StakingContract {
+contract StakingContract is Ownable {
 
   using SafeMath for uint96; 
   using SafeMath for uint;
 
-  uint constant  REWARD_PERCENTAGE = 5;
-  uint constant  REWARD_ROUND_DURATION = 120; //Reward generation interval in days
-  
-  uint constant  WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
+  uint REWARD_PERCENTAGE = 5;
+  uint REWARD_ROUND_DURATION = 120; //Reward generation interval in days
+  uint WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
+  uint WITHDRAWAL_TIMEFRAME = 30;
  
   mapping (address => StakingLibrary.UserStakeData) userStakes;
   mapping (uint => StakingLibrary.RewardData) rewards;
@@ -98,13 +99,15 @@ function claimRewards() public{
     require(userData.currentStakeAmount > 0);
 
     require(userData.lastRewardRoundClaimed == rewardRoundNumber);
+
+    require(now <= calculateWithdrawalTimeframeEndDate(userData.activeUntilDate));
+
     
-     
-     
     uint amountToWitdraw = userData.currentStakeAmount;
      
-    if(userData.activeUntilDate <= now)
+    if(now <= userData.activeUntilDate)
         amountToWitdraw  = amountToWitdraw.sub(amountToWitdraw.mul(WITHDRAWING_WHILE_ACTIVE_PENALTY).div(100));
+
 
     totalTokenLockedAmount=totalTokenLockedAmount.sub(userData.currentStakeAmount);
     totalEthReceived=totalEthReceived.sub(userData.totalSentAmount);
@@ -148,7 +151,10 @@ function claimRewards() public{
 
   function generateReward() public {
     
-    require(now > nextRewardDate);
+    require(now >= nextRewardDate);
+    
+    if(address(this).balance > 0) //convert has to be called before generateReward
+      convert();
 
     uint currentGlobalStakeSize = calculateGlobalStakeSize();
     
@@ -171,9 +177,11 @@ function claimRewards() public{
   function convert() public{
 
 
-    tokenTrader.tradeTokens.value(address(this).balance)(token, this);
+    uint currentBalance = address(this).balance;
 
-    totalEthReceived = totalEthReceived.add(address(this).balance);
+    tokenTrader.tradeTokens.value(currentBalance)(token, this);
+
+    totalEthReceived = totalEthReceived.add(currentBalance);
     
   }
  
@@ -228,13 +236,30 @@ function getTotalRewardsForRound(uint32 index) public view returns (uint rewardA
  }
 
 
+  function calculateWithdrawalTimeframeEndDate(uint activeUntilDate) internal view  returns(uint){
+      return activeUntilDate +(60*60*24*REWARD_ROUND_DURATION);
+  }
 
-  function calculateNextRewardDate() internal pure returns(uint){
+  function calculateNextRewardDate() internal view returns(uint){
       
       uint currentDate = now;
 
       return currentDate+(60*60*24*REWARD_ROUND_DURATION);
   }
-    
-    
+
+
+  //contract management functions
+
+  function setRewardRoundDuration(uint duration) onlyOwner public {
+
+      REWARD_ROUND_DURATION = duration;
+  }
+
+  function setRewardPercentage(uint percentage) onlyOwner public {
+
+      require(percentage <= 100);
+
+      REWARD_PERCENTAGE = percentage;
+  }
+
 }
