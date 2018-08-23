@@ -139,6 +139,18 @@ The most critical one. As It's called every time the users sends his ETH to the 
 
 ETH/USD = 272$
 
+### `convert()`
+
+It's the most expensive one in term of gas consumption. But since it is called randomly, it can be called whenever the gas price is low enough.
+
+|  |  Average  |
+|--| ------------- |
+| GAS  | 25000  | 
+| USD at safelow 3 | 0.20$  |
+| USD at safelow 60 | 4.06$  |
+
+ETH/USD = 272$
+
 
 ## Model simulation examples
 
