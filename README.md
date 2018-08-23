@@ -47,11 +47,13 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 
 First step of the model is collecting the payments. Payments are sent to the staking smart contract (please refere to the `StakingContract` in the [API Reference](#api-reference) section) using the [`receive()`](#receive) function. The function stores the ETH received into the smart contract, and keeps track of the data of the user (total amount of ETH received, active date).
 The conversion from ETH to LEND is performed by the [`convert()`](#convert) fuction, that calls the Kyber network `trade()` method.
-The smart contract keeps track of the global stake deposit through the variable `calculateGlobalStakeSize()` method.
+The smart contract keeps track of the global stake deposit through the `calculateGlobalStakeSize()` method.
 
 #### 2. Generating, staking and claiming the rewards
 
 ![Optional Text](../master/assets/rewards.png)
+The periodic reward is calculated using the [`generateReward()`](#generatereward) method. the call to `generateReward()` marks the start of a new reward round in which users can claim their rewards.  The reward is a percentage of the global stake deposit (the percentage is stored into the `REWARD_PERCENTAGE` contract variable) and it's 5% by default. When a reward is generated, users will need to claim their rewards using the  `claimRewards()` function. Users can wait for multiple reward rounds before claiming their rewards. The total will be calculated automatically using the history data stored for each user.
+
 
 #### 3. Withdraw the rewards
 
