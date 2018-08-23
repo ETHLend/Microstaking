@@ -45,7 +45,9 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 
 ![Optional Text](../master/assets/collection.png)
 
-First step of the model is collecting the payments. Payments are sent to the staking smart contract (please refere to the `StakingContract` in the [API Reference](#api-reference) section) using the [`receive()`](#receive) function.
+First step of the model is collecting the payments. Payments are sent to the staking smart contract (please refere to the `StakingContract` in the [API Reference](#api-reference) section) using the [`receive()`](#receive) function. The function stores the ETH received into the smart contract, and keeps track of the data of the user (total amount of ETH received, active date).
+The conversion from ETH to LEND is performed by the [`convert()`](#convert) fuction, that calls the Kyber network `trade()` method.
+The smart contract keeps track of the global stake deposit through the variable `calculateGlobalStakeSize()` method.
 
 #### 2. Generating, staking and claiming the rewards
 
