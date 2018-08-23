@@ -75,29 +75,92 @@ The withdraw of the stake can be done by the users using the [`withdrawStake()`]
 
 Defines the data structures needed to keep track of the reward rounds, the stakes of the users and the history data of the users.
 
-#### 1. `UserStakeData`
-#### 2. `UserHistoryData`
-#### 3. `RewardData`
+* #### `UserStakeData`
+        Stores the stake size for the users, the total amount of eth sent to the staking smart contract, the active timeframe for the user.  
+
+* #### `UserHistoryData`
+        Stores the historical data (active date and total eth sent) for the user for each reward round in which the use has sent ETH to the smart contract
+
+* #### `RewardData`
+        Keeps track of the rewards data for each reward round.
 
 ### `StakingContract`
 
 The core of the model. Keeps track of the ETH received, converts to the ERC20 Token and calculates the rewards for the users. By calling this smart contract users are able to claim their rewards and withdraw their stakes.
 
-#### 1. `receive()`
-#### 2. `convert()`
-#### 3. `generateReward()`
-#### 4. `claimRewards()`
-#### 5. `withdrawStake()`
+ * #### `receive()`
+         Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total             amount of   ETH sent to the smart contract and the history data for the current reward round.
+
+ * #### `convert()`
+         Called to convert the ETH stored into the staking smart contract to the ERC20 token.
+
+ * #### `generateReward()`
+         Starts a new rewand round. Reward for the round is calculated and data is stored into the `RewardData` mapping.
+
+ * #### `claimRewards()`
+         Allows the user to claim their rewards for all the reward rounds he has not claimed. Updates the `UserStakeData`          accordingly.
+
+ * #### `withdrawStake()`
+         Called by the users to withdraw their stake. Every time a user withdraws, their current data (total amount of ETH sent, starting         reward round, stake size) and the hystorical data is cleared.
 
 ### KyberTokenTrader
 
 Converts the ETH sent to ERC20 token
 
-#### 4. `tradeTokens()`
+ *#### 1. `tradeTokens()`
+           Calls the Kyber network `trade()` function to convert ETH to the target ERC20 token.
 
 ## Basic terminology
 
+* ### Global stake deposit:
+      Identifies the amount of ERC20 token stored into the smart contract, that is periodically distributed to the users.
+
+* ### Reward round:
+      Is one reward period. Rewards can be generated every 90 days by default. For every reward round, every user can claim part of the total reward for the round. The portion of the total reward for each user is proportional to the total amount of ETH he sent to the staking smart contract.
+
+* ### Withdrawal timeframe:
+      The withdrawal period in which the user can withdraw his entire stake without penalty
+
+* ### 
+
 ## GAS Cost analysis
+
+When adopting the microstaking model it's very important to keep in mind the gas costs involved in using the solution. The amount paid from the user to contribute to the microstaking should be high enough compared to the gas cost of the transaction to be meaningful, but not too high to avoid burden the users too much. Following there are some gas cost calculation for the main methods that will be used by the users, `receive()`, `convert()`, `claimRewards()` and `withdrawStake()`.
+
+### `receive()`
+
+The most critical one. As It's called every time the users sends his ETH to the staking smart contract, we tried to reduce the costs as much as possible.
+
+|  | Worst case scenario  | Average | Best case |
+|--| -------------  | ------------- | ------------- |
+| GAS  | 82000  | 47000  | 37000 |
+| USD at safelow 3 | 0.07 | 0.04$ | 0.03$ |
+| USD at safelow 60 | 1.33 | 0.76$ | 0.6$  |
+
+ETH/USD = 272$
+
+### `convert()`
+
+It's the most expensive in term of gas consumption. But since it's not called directly by the user, it can be executed whenever the gas price is low enough.
+
+|  |  Average  |
+|--| ------------- |
+| GAS  | 25000  | 
+| USD at safelow 3 | 0.20$  |
+| USD at safelow 60 | 4.06$  |
+
+ETH/USD = 272$
+
+### `claimRewards()`
+
+
+|  | Average |
+|--| -------------  | 
+| GAS  | 90000  | 
+| USD at safelow 3 | 0.08 | 
+| USD at safelow 60 | 1.50 |
+
 
 ## Model simulation examples
 
+[Coming soon]
