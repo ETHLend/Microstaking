@@ -8,7 +8,10 @@ Table of contents
 <!--ts-->
    * [Disclaimer](#disclaimer)
    * [License](#license)
-   * [Introduction](#installation)
+   * [Introduction](#introduction)
+   ** [Generic description of the model](#generic-description-of-the-model)
+   *** [Collecting, converting and staking the payments](#collecting-converting-and-staking-the-payments)
+   
 <!--te-->
 
 
