@@ -9,6 +9,12 @@ All the material in this repository is released under the CC0 (Creative Common) 
 
 ## Introduction
 
-This repo contains the ETHLend microstaking smart contracts. The readme  describes the basic functionalities of the contracts involved and the basic flow of operation.
+This repo contains the ETHLend microstaking smart contracts. The readme  describes the functionalities of the contracts involved and the basic flow of operation.
 
 ## Generic description of the model
+
+Microstaking is a new approach to manage the economy of a token and provides a new low velocity approach for potentially any ERC20 token used in the context of distributed applications on the ethereum blockchain. For further information on the idea behind this implementation please refer to the following medium post: <link to the post here>
+
+### How it works
+
+
