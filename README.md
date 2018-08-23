@@ -141,7 +141,7 @@ ETH/USD = 272$
 
 ### `convert()`
 
-It's the most expensive one in term of gas consumption. But since it is called randomly, it can be called whenever the gas price is low enough.
+It's the most expensive in term of gas consumption. But since it's not called directly by the user, it can be executed whenever the gas price is low enough.
 
 |  |  Average  |
 |--| ------------- |
@@ -151,6 +151,16 @@ It's the most expensive one in term of gas consumption. But since it is called r
 
 ETH/USD = 272$
 
+### `claimRewards()`
+
+
+|  | Average |
+|--| -------------  | 
+| GAS  | 90000  | 
+| USD at safelow 3 | 0.08 | 
+| USD at safelow 60 | 1.50 |
+
 
 ## Model simulation examples
 
+[Coming soon]
