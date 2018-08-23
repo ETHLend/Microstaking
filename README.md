@@ -59,7 +59,7 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 
 ## Basic terminology
 
-## GAS Cost estimation
+## GAS Cost analysis
 
 ## Model simulation examples
 
