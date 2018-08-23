@@ -58,7 +58,7 @@ The periodic reward is calculated using the [`generateReward()`](#generatereward
 #### 3. Withdraw the rewards
 
 ![Optional Text](../master/assets/withdraw.png)
-
+The withdraw of the stake can be done by the users using the [`withdrawStake()`](#withdrawstake) method. When withdrawing, users will need to take into account in which phase of the staking period they are withdrawing. Withdrawing while still being active on the platform can be subjected to a fee, called withdrawal penalty. The penalty is a percentage of the user's stake, the percentage is stored into the `WITHDRAWING_WHILE_ACTIVE_PENALTY` contract variable. Once a user becomes inactive, he enters in a time period called "withdrawal timeframe". During this period he can withdraw the stake without any penalty. The duration of the withdrawal timeframe is stored into the WITHDRAWAL_TIMEFRAME variable and by default is 30 days. After the withdrawal timeframe, the withdrawal becomes locked and any call to `withdrawStake()` results in a error. The only way for the user to unlock the stake is to become active again by using the platform.
 
 ## API Reference
 
