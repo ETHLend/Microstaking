@@ -119,9 +119,26 @@ Converts the ETH sent to ERC20 token
       Is one reward period. Rewards can be generated every 90 days by default. For every reward round, every user can claim part of the total reward for the round. The portion of the total reward for each user is proportional to the total amount of ETH he sent to the staking smart contract.
 
 * ### Withdrawal timeframe:
+      The withdrawal period in which the user can withdraw his entire stake without penalty
 
+* ### 
 
 ## GAS Cost analysis
+
+When adopting the microstaking model it's very important to keep in mind the gas costs involved in using the solution. The amount paid from the user to contribute to the microstaking should be high enough compared to the gas cost of the transaction to be meaningful, but not too high to avoid burden the users too much. Following there are some gas cost calculation for the main methods that will be used by the users, `receive()`, `convert()`, `claimRewards()` and `withdrawStake()`.
+
+### `receive()`
+
+The most critical one. As It's called every time the users sends his ETH to the staking smart contract, we tried to reduce the costs as much as possible.
+
+|  | Worst case scenario  | Average | Best case |
+|--| -------------  | ------------- | ------------- |
+| GAS  | 82000  | 47000  | 37000 |
+| USD at safelow 3 | 0.07 | 0.04$ | 0.03$ |
+| USD at safelow 60 | 1.33 | 0.76$ | 0.6$  |
+
+ETH/USD = 272$
+
 
 ## Model simulation examples
 
