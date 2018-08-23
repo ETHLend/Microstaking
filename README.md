@@ -9,8 +9,8 @@ Table of contents
    * [Disclaimer](#disclaimer)
    * [License](#license)
    * [Introduction](#introduction)
-   ** [Generic description of the model](#generic-description-of-the-model)
-   *** [Collecting, converting and staking the payments](#collecting-converting-and-staking-the-payments)
+      * [Generic description of the model](#generic-description-of-the-model)
+          * [Collecting, converting and staking the payments](#collecting-converting-and-staking-the-payments)
    
 <!--te-->
 
