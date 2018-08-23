@@ -89,7 +89,7 @@ Keeps track of the rewards data for each reward round.
 The core of the model. Keeps track of the ETH received, converts to the ERC20 Token and calculates the rewards for the users. By calling this smart contract users are able to claim their rewards and withdraw their stakes.
 
  * #### 1. `receive()`
-  Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total amount of   ETH sent to the smart contract and the history data for the current reward round.
+            Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total             amount of   ETH sent to the smart contract and the history data for the current reward round.
 
  * #### 2. `convert()`
   Called to convert the ETH stored into the staking smart contract to the ERC20 token.
