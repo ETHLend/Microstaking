@@ -75,33 +75,33 @@ The withdraw of the stake can be done by the users using the [`withdrawStake()`]
 
 Defines the data structures needed to keep track of the reward rounds, the stakes of the users and the history data of the users.
 
-#### 1. `UserStakeData`
-Stores the stake size for the users, the total amount of eth sent to the staking smart contract, the active timeframe for the user.  
+* #### `UserStakeData`
+        Stores the stake size for the users, the total amount of eth sent to the staking smart contract, the active timeframe for the user.  
 
-#### 2. `UserHistoryData`
-Stores the historical data (active date and total eth sent) for the user for each reward round in which the use has sent ETH to the smart contract
+* #### `UserHistoryData`
+        Stores the historical data (active date and total eth sent) for the user for each reward round in which the use has sent ETH to the smart contract
 
-#### 3. `RewardData`
-Keeps track of the rewards data for each reward round.
+* #### `RewardData`
+        Keeps track of the rewards data for each reward round.
 
 ### `StakingContract`
 
 The core of the model. Keeps track of the ETH received, converts to the ERC20 Token and calculates the rewards for the users. By calling this smart contract users are able to claim their rewards and withdraw their stakes.
 
- * #### 1. `receive()`
-            Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total             amount of   ETH sent to the smart contract and the history data for the current reward round.
+ * #### `receive()`
+         Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total             amount of   ETH sent to the smart contract and the history data for the current reward round.
 
- * #### 2. `convert()`
-            Called to convert the ETH stored into the staking smart contract to the ERC20 token.
+ * #### `convert()`
+         Called to convert the ETH stored into the staking smart contract to the ERC20 token.
 
- * #### 3. `generateReward()`
-            Starts a new rewand round. Reward for the round is calculated and data is stored into the `RewardData` mapping.
+ * #### `generateReward()`
+         Starts a new rewand round. Reward for the round is calculated and data is stored into the `RewardData` mapping.
 
- * #### 4. `claimRewards()`
-            Allows the user to claim their rewards for all the reward rounds he has not claimed. Updates the `UserStakeData`          accordingly.
+ * #### `claimRewards()`
+         Allows the user to claim their rewards for all the reward rounds he has not claimed. Updates the `UserStakeData`          accordingly.
 
- * #### 5. `withdrawStake()`
-            Called by the users to withdraw their stake. Every time a user withdraws, their current data (total amount of ETH sent, starting         reward round, stake size) and the hystorical data is cleared.
+ * #### `withdrawStake()`
+         Called by the users to withdraw their stake. Every time a user withdraws, their current data (total amount of ETH sent, starting         reward round, stake size) and the hystorical data is cleared.
 
 ### KyberTokenTrader
 
