@@ -1,6 +1,17 @@
 ![Optional Text](../master/assets/header.png)
 # ETHLend Microstaking economy model
 
+
+Table of contents
+=================
+
+<!--ts-->
+   * [Disclaimer](#disclaimer)
+   * [License](#license)
+   * [Introduction](#installation)
+<!--te-->
+
+
 ## Disclaimer
 This is a highly experimental software component. It can be subjected to bugs and will likely evolve significantly over time. Use at your own risk.
 
