@@ -43,7 +43,7 @@ The ERC20 into the smart contract will periodically be redistributed to the user
 
 #### 2. Generating, staking and claiming the rewards
 
-![Optional Text](../master/assets/reward.png)
+![Optional Text](../master/assets/rewards.png)
 
 #### 3. Withdraw the rewards
 
