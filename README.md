@@ -10,7 +10,9 @@ Table of contents
    * [License](#license)
    * [Introduction](#introduction)
       * [Generic description of the model](#generic-description-of-the-model)
-          * [Collecting, converting and staking the payments](#collecting-converting-and-staking-the-payments)
+          * [Collecting, converting and staking the payments](#1-collecting-converting-and-staking-the-payments)
+          * [Generating, staking and claiming the rewards](#2-generating-staking-and-claiming-the-rewards)
+          * [Withdraw the rewards](#3-withdraw-the-rewards)
    
 <!--te-->
 
