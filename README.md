@@ -112,13 +112,13 @@ Calls the Kyber network `trade()` function to convert ETH to the target ERC20 to
 
 ## Basic terminology
 
-### Global stake deposit
+### Global stake deposit:
 Identifies the amount of ERC20 token stored into the smart contract, that is periodically distributed to the users.
 
-### Reward round
-Is one reward period. Rewards can be generated every 90 days by default. For every reward round, every user can claim part of the total reward for the round. The portion of the total reward for each user is proportional to the total amount of ETH he sent to the staking smart contract.
+* ### Reward round:
+* Is one reward period. Rewards can be generated every 90 days by default. For every reward round, every user can claim part of the total reward for the round. The portion of the total reward for each user is proportional to the total amount of ETH he sent to the staking smart contract.
 
-### Withdrawal timeframe
+* ### Withdrawal timeframe:
 
 
 ## GAS Cost analysis
