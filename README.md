@@ -88,19 +88,19 @@ Keeps track of the rewards data for each reward round.
 
 The core of the model. Keeps track of the ETH received, converts to the ERC20 Token and calculates the rewards for the users. By calling this smart contract users are able to claim their rewards and withdraw their stakes.
 
- *#### 1. `receive()`
+ * #### 1. `receive()`
 Called whenever payments are collected from the users. It updates the user data increasing the active time window, the total amount of ETH sent to the smart contract and the history data for the current reward round.
 
- *#### 2. `convert()`
+ * #### 2. `convert()`
 Called to convert the ETH stored into the staking smart contract to the ERC20 token.
 
- *#### 3. `generateReward()`
+ * #### 3. `generateReward()`
 Starts a new rewand round. Reward for the round is calculated and data is stored into the `RewardData` mapping.
 
- *#### 4. `claimRewards()`
+ * #### 4. `claimRewards()`
 Allows the user to claim their rewards for all the reward rounds he has not claimed. Updates the `UserStakeData` accordingly.
 
- *#### 5. `withdrawStake()`
+ * #### 5. `withdrawStake()`
 Called by the users to withdraw their stake. Every time a user withdraws, their current data (total amount of ETH sent, starting reward round, stake size) and the hystorical data is cleared.
 
 ### KyberTokenTrader
