@@ -14,6 +14,10 @@ Table of contents
           * [Generating, staking and claiming the rewards](#2-generating-staking-and-claiming-the-rewards)
           * [Withdraw the rewards](#3-withdraw-the-rewards)
    * [API Reference](#api-reference)
+      * StakingLibrary
+      * StakingContract
+      * TokenTrader
+      * KyberTokenTrader
    * [Basic terminology](#basic-terminology)
    * [GAS Cost analysis](#gas-cost-analysis)
    * [Model simulation examples](#model-simulation-examples)
