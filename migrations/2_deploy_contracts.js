@@ -3,21 +3,25 @@ var tokenTrader = artifacts.require("MockTokenTrader");
 var stakingContract = artifacts.require("StakingContract");
 var stakingLibrary = artifacts.require("StakingLibrary");
 
-module.exports = async function (deployer) {
+module.exports = function (deployer) {
 
-    await deployer.deploy(token);
+    deployer.deploy(token).then(() => {
 
-    await deployer.deploy(tokenTrader);
+        deployer.deploy(tokenTrader).then(() => {
 
-    console.log("Deploying staking smart contract, token address: "+token.address+", trader address: "+tokenTrader.address );
+            console.log("Deploying staking smart contract, token address: " + token.address + ", trader address: " + tokenTrader.address);
 
 
-    await deployer.deploy(stakingLibrary);
+            deployer.deploy(stakingLibrary).then(() => {
 
-    deployer.link(stakingLibrary, stakingContract);
+                deployer.link(stakingLibrary, stakingContract);
 
-    await deployer.deploy(stakingContract, token.address, tokenTrader.address);
+                deployer.deploy(stakingContract, token.address, tokenTrader.address).then(() => {
 
-    console.log("Staking smart contract deployed, address: "+stakingContract.address );
+                    console.log("Staking smart contract deployed, address: " + stakingContract.address);
+                });
+            });
+        });
 
+    });
 };

@@ -83,7 +83,7 @@
         "id": 15,
         "nodeType": "ImportDirective",
         "scope": 76,
-        "sourceUnit": 3155,
+        "sourceUnit": 3901,
         "src": "30:35:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -94,7 +94,7 @@
         "id": 16,
         "nodeType": "ImportDirective",
         "scope": 76,
-        "sourceUnit": 1553,
+        "sourceUnit": 2299,
         "src": "67:38:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -108,10 +108,10 @@
               "id": 17,
               "name": "TokenTrader",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1552,
+              "referencedDeclaration": 2298,
               "src": "140:11:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TokenTrader_$1552",
+                "typeIdentifier": "t_contract$_TokenTrader_$2298",
                 "typeString": "contract TokenTrader"
               }
             },
@@ -121,7 +121,7 @@
           }
         ],
         "contractDependencies": [
-          1552
+          2298
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -129,7 +129,7 @@
         "id": 75,
         "linearizedBaseContracts": [
           75,
-          1552
+          2298
         ],
         "name": "KyberTokenTrader",
         "nodeType": "ContractDefinition",
@@ -144,7 +144,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+              "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
               "typeString": "contract KyberNetworkProxy"
             },
             "typeName": {
@@ -152,10 +152,10 @@
               "id": 19,
               "name": "KyberNetworkProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3154,
+              "referencedDeclaration": 3900,
               "src": "162:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                 "typeString": "contract KyberNetworkProxy"
               }
             },
@@ -185,7 +185,7 @@
                       "referencedDeclaration": 20,
                       "src": "283:13:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                         "typeString": "contract KyberNetworkProxy"
                       }
                     },
@@ -219,10 +219,10 @@
                         "name": "KyberNetworkProxy",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3154,
+                        "referencedDeclaration": 3900,
                         "src": "299:17:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_KyberNetworkProxy_$3154_$",
+                          "typeIdentifier": "t_type$_t_contract$_KyberNetworkProxy_$3900_$",
                           "typeString": "type(contract KyberNetworkProxy)"
                         }
                       },
@@ -236,13 +236,13 @@
                       "nodeType": "FunctionCall",
                       "src": "299:40:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                         "typeString": "contract KyberNetworkProxy"
                       }
                     },
                     "src": "283:56:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                      "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                       "typeString": "contract KyberNetworkProxy"
                     }
                   },
@@ -553,10 +553,10 @@
                             "name": "ERC20",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1279,
+                            "referencedDeclaration": 2025,
                             "src": "932:5:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_ERC20_$1279_$",
+                              "typeIdentifier": "t_type$_t_contract$_ERC20_$2025_$",
                               "typeString": "type(contract ERC20)"
                             }
                           },
@@ -570,7 +570,7 @@
                           "nodeType": "FunctionCall",
                           "src": "932:51:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           }
                         },
@@ -582,7 +582,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3169,
+                            "referencedDeclaration": 5797,
                             "src": "1054:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -612,7 +612,7 @@
                           "referencedDeclaration": 34,
                           "src": "1122:6:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           }
                         },
@@ -677,7 +677,7 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           },
                           {
@@ -685,7 +685,7 @@
                             "typeString": "uint256"
                           },
                           {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           },
                           {
@@ -714,7 +714,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3169,
+                              "referencedDeclaration": 5797,
                               "src": "835:3:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -754,7 +754,7 @@
                               "referencedDeclaration": 20,
                               "src": "809:13:1",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                                 "typeString": "contract KyberNetworkProxy"
                               }
                             },
@@ -765,10 +765,10 @@
                             "lValueRequested": false,
                             "memberName": "trade",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2706,
+                            "referencedDeclaration": 3452,
                             "src": "809:19:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$",
+                              "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$",
                               "typeString": "function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256)"
                             }
                           },
@@ -782,7 +782,7 @@
                           "referencedDeclaration": null,
                           "src": "809:25:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_setvalue_nonpayable$_t_uint256_$returns$_t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value_$",
+                            "typeIdentifier": "t_function_setvalue_nonpayable$_t_uint256_$returns$_t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value_$",
                             "typeString": "function (uint256) returns (function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256))"
                           }
                         },
@@ -796,7 +796,7 @@
                         "nodeType": "FunctionCall",
                         "src": "809:36:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value",
+                          "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value",
                           "typeString": "function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256)"
                         }
                       },
@@ -848,7 +848,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$1279",
+                    "typeIdentifier": "t_contract$_ERC20_$2025",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
@@ -856,10 +856,10 @@
                     "id": 33,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1279,
+                    "referencedDeclaration": 2025,
                     "src": "379:5:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$1279",
+                      "typeIdentifier": "t_contract$_ERC20_$2025",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -932,7 +932,7 @@
             "scope": 75,
             "src": "358:1158:1",
             "stateMutability": "payable",
-            "superFunction": 1551,
+            "superFunction": 2297,
             "visibility": "external"
           }
         ],
@@ -969,7 +969,7 @@
         "id": 15,
         "nodeType": "ImportDirective",
         "scope": 76,
-        "sourceUnit": 3155,
+        "sourceUnit": 3901,
         "src": "30:35:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -980,7 +980,7 @@
         "id": 16,
         "nodeType": "ImportDirective",
         "scope": 76,
-        "sourceUnit": 1553,
+        "sourceUnit": 2299,
         "src": "67:38:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -994,10 +994,10 @@
               "id": 17,
               "name": "TokenTrader",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1552,
+              "referencedDeclaration": 2298,
               "src": "140:11:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TokenTrader_$1552",
+                "typeIdentifier": "t_contract$_TokenTrader_$2298",
                 "typeString": "contract TokenTrader"
               }
             },
@@ -1007,7 +1007,7 @@
           }
         ],
         "contractDependencies": [
-          1552
+          2298
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1015,7 +1015,7 @@
         "id": 75,
         "linearizedBaseContracts": [
           75,
-          1552
+          2298
         ],
         "name": "KyberTokenTrader",
         "nodeType": "ContractDefinition",
@@ -1030,7 +1030,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+              "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
               "typeString": "contract KyberNetworkProxy"
             },
             "typeName": {
@@ -1038,10 +1038,10 @@
               "id": 19,
               "name": "KyberNetworkProxy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3154,
+              "referencedDeclaration": 3900,
               "src": "162:17:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                 "typeString": "contract KyberNetworkProxy"
               }
             },
@@ -1071,7 +1071,7 @@
                       "referencedDeclaration": 20,
                       "src": "283:13:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                         "typeString": "contract KyberNetworkProxy"
                       }
                     },
@@ -1105,10 +1105,10 @@
                         "name": "KyberNetworkProxy",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3154,
+                        "referencedDeclaration": 3900,
                         "src": "299:17:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_KyberNetworkProxy_$3154_$",
+                          "typeIdentifier": "t_type$_t_contract$_KyberNetworkProxy_$3900_$",
                           "typeString": "type(contract KyberNetworkProxy)"
                         }
                       },
@@ -1122,13 +1122,13 @@
                       "nodeType": "FunctionCall",
                       "src": "299:40:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                        "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                         "typeString": "contract KyberNetworkProxy"
                       }
                     },
                     "src": "283:56:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                      "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                       "typeString": "contract KyberNetworkProxy"
                     }
                   },
@@ -1439,10 +1439,10 @@
                             "name": "ERC20",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1279,
+                            "referencedDeclaration": 2025,
                             "src": "932:5:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_ERC20_$1279_$",
+                              "typeIdentifier": "t_type$_t_contract$_ERC20_$2025_$",
                               "typeString": "type(contract ERC20)"
                             }
                           },
@@ -1456,7 +1456,7 @@
                           "nodeType": "FunctionCall",
                           "src": "932:51:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           }
                         },
@@ -1468,7 +1468,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3169,
+                            "referencedDeclaration": 5797,
                             "src": "1054:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1498,7 +1498,7 @@
                           "referencedDeclaration": 34,
                           "src": "1122:6:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           }
                         },
@@ -1563,7 +1563,7 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           },
                           {
@@ -1571,7 +1571,7 @@
                             "typeString": "uint256"
                           },
                           {
-                            "typeIdentifier": "t_contract$_ERC20_$1279",
+                            "typeIdentifier": "t_contract$_ERC20_$2025",
                             "typeString": "contract ERC20"
                           },
                           {
@@ -1600,7 +1600,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3169,
+                              "referencedDeclaration": 5797,
                               "src": "835:3:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -1640,7 +1640,7 @@
                               "referencedDeclaration": 20,
                               "src": "809:13:1",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3154",
+                                "typeIdentifier": "t_contract$_KyberNetworkProxy_$3900",
                                 "typeString": "contract KyberNetworkProxy"
                               }
                             },
@@ -1651,10 +1651,10 @@
                             "lValueRequested": false,
                             "memberName": "trade",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2706,
+                            "referencedDeclaration": 3452,
                             "src": "809:19:1",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$",
+                              "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$",
                               "typeString": "function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256)"
                             }
                           },
@@ -1668,7 +1668,7 @@
                           "referencedDeclaration": null,
                           "src": "809:25:1",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_setvalue_nonpayable$_t_uint256_$returns$_t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value_$",
+                            "typeIdentifier": "t_function_setvalue_nonpayable$_t_uint256_$returns$_t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value_$",
                             "typeString": "function (uint256) returns (function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256))"
                           }
                         },
@@ -1682,7 +1682,7 @@
                         "nodeType": "FunctionCall",
                         "src": "809:36:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$1279_$_t_uint256_$_t_contract$_ERC20_$1279_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value",
+                          "typeIdentifier": "t_function_external_payable$_t_contract$_ERC20_$2025_$_t_uint256_$_t_contract$_ERC20_$2025_$_t_address_$_t_uint256_$_t_uint256_$_t_address_$returns$_t_uint256_$value",
                           "typeString": "function (contract ERC20,uint256,contract ERC20,address,uint256,uint256,address) payable external returns (uint256)"
                         }
                       },
@@ -1734,7 +1734,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$1279",
+                    "typeIdentifier": "t_contract$_ERC20_$2025",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
@@ -1742,10 +1742,10 @@
                     "id": 33,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1279,
+                    "referencedDeclaration": 2025,
                     "src": "379:5:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$1279",
+                      "typeIdentifier": "t_contract$_ERC20_$2025",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -1818,7 +1818,7 @@
             "scope": 75,
             "src": "358:1158:1",
             "stateMutability": "payable",
-            "superFunction": 1551,
+            "superFunction": 2297,
             "visibility": "external"
           }
         ],
@@ -1834,5 +1834,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-08T13:26:28.200Z"
+  "updatedAt": "2018-08-24T09:32:54.806Z"
 }
