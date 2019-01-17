@@ -1,16 +1,16 @@
 
 pragma solidity ^0.4.18;
 
-import "../interfaces/TokenTrader.sol";
+import "../interfaces/ITokenTrader.sol";
 
 
-contract MockTokenTrader is TokenTrader{
+contract MockTokenTrader is ITokenTrader{
   
 
     function tradeTokens(ERC20 _token, address _destinationAddress) external payable returns(uint noOfTokens) {
         
-        _token.approve(this, msg.value*2);
-        _token.transferFrom(this, msg.sender, msg.value*2);
+        _token.approve(this, msg.value*(1000));
+        _token.transferFrom(this, msg.sender, msg.value*(1000));
 
     }
 	

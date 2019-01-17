@@ -1,20 +1,31 @@
 
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 import "./vendor/KyberNetwork.sol";
 import "./base/math/SafeMath.sol";
 import "./base/ownership/Ownable.sol";
-import "./interfaces/tokentrader.sol";
+import "./interfaces/IStakingContract.sol";
+import "./interfaces/ITokenTrader.sol";
+import "./interfaces/IRewardCalculator.sol";
 import "./StakingLibrary.sol";
 
 
-contract StakingContract is Ownable {
+contract StakingContract is Ownable, IStakingContract {
 
   using SafeMath for uint96; 
   using SafeMath for uint;
 
+
+  /*********TEST PARAMETERS*********/
+  uint REWARD_ROUND_DURATION = 1 hours; //Reward generation interval in days
+  /**********************************/
+  
+  /********PRODUCTION PARAMETERS*****/
+  //uint REWARD_ROUND_DURATION = 120 days; //Reward generation interval in days
+  /**********************************/
+  
   uint REWARD_PERCENTAGE = 5;
-  uint REWARD_ROUND_DURATION = 120; //Reward generation interval in days
+  
   uint WITHDRAWING_WHILE_ACTIVE_PENALTY = 20;
   uint WITHDRAWAL_TIMEFRAME = 30;
  
@@ -35,59 +46,44 @@ contract StakingContract is Ownable {
 
   ERC20 public token;
  
-  TokenTrader tokenTrader;
+  ITokenTrader tokenTrader;
+  IRewardCalculator rewardCalculator;
   
 
-  constructor(address _tokenAddress, address _tokenTraderAddress) public {
+  constructor(address _tokenAddress, address _tokenTraderAddress, address _rewardCalculator) public {
 
         // Check inputs
     require(_tokenAddress != address(0));
     require(_tokenTraderAddress != address(0));
 
     token = ERC20(_tokenAddress);
-    tokenTrader = TokenTrader(_tokenTraderAddress);
+    tokenTrader = ITokenTrader(_tokenTraderAddress);
+    rewardCalculator = IRewardCalculator(_rewardCalculator);
+    nextRewardDate = calculateNextRewardDate();
      
   }
+  
+ function setTokenTrader(address _tokenTrader) public onlyOwner {
+     
+     tokenTrader = ITokenTrader(_tokenTrader);
+ }
+
+ function setRewardCalculator(address _rewardCalculator) public onlyOwner {
+     
+     rewardCalculator = IRewardCalculator(_rewardCalculator);
+ }
 
 
 function claimRewards() public{
     
      StakingLibrary.UserStakeData storage userData = userStakes[msg.sender];
+
+     uint96 pendingReward = rewardCalculator.calculateReward(msg.sender);
      
-     uint64 lastActiveDate;
-     uint96 lastAmount;
-
-     for(uint32 i=userData.lastRewardRoundClaimed; i < rewardRoundNumber; i++ ){
-         
-         StakingLibrary.UserHistoryData storage historyEntry = userData.history[i];
-         StakingLibrary.RewardData storage currentRewardRoundData= rewards[i];
-         
-         
-         if(historyEntry.amount > 0){
-           
-            uint reward = uint96(historyEntry.amount.div(currentRewardRoundData.totalEthReceived).mul(currentRewardRoundData.totalReward));
-         
-            userData.currentStakeAmount += uint96(reward);
-            
-            lastAmount = historyEntry.amount;
-            lastActiveDate = historyEntry.activeDate;
-             
-         }
-         else{
-            
-            //if amount = 0, user didn't send any fee during the reward round. in that case we need to check if the account was active or not. If still active,
-            //we calculate the reward based on the previous round amount, otherwise we send the reward back to the global StakeLibrary
-
-            reward = lastAmount.div(currentRewardRoundData.totalEthReceived).mul(currentRewardRoundData.totalReward);
-            
-            if(lastActiveDate >= currentRewardRoundData.rewardDate)
-                userData.currentStakeAmount += uint96(reward);
-            else //send back the reward to the global stake
-                totalTokenLockedAmount-=reward;
-
-         }
-     }
      
+     userData.currentStakeAmount += pendingReward;
+     userData.lastHistoryEntryOnClaimed = userData.history.length-1;
+ 
      userData.lastRewardRoundClaimed = rewardRoundNumber;
      
  }
@@ -99,48 +95,33 @@ function claimRewards() public{
     require(userData.currentStakeAmount > 0);
 
     require(userData.lastRewardRoundClaimed == rewardRoundNumber);
-
-    require(now <= calculateWithdrawalTimeframeEndDate(userData.activeUntilDate));
-
     
-    uint amountToWitdraw = userData.currentStakeAmount;
-     
-    if(now <= userData.activeUntilDate)
-        amountToWitdraw  = amountToWitdraw.sub(amountToWitdraw.mul(WITHDRAWING_WHILE_ACTIVE_PENALTY).div(100));
+    require(rewardCalculator.canUserWithdraw(msg.sender));
 
+    uint amountToWitdraw = userData.currentStakeAmount;
 
     totalTokenLockedAmount=totalTokenLockedAmount.sub(userData.currentStakeAmount);
-    totalEthReceived=totalEthReceived.sub(userData.totalSentAmount);
- 
-    
-    userData.currentStakeAmount = 0;
-    userData.totalSentAmount = 0;
-    userData.activeUntilDate = 0;
 
+    userData.currentStakeAmount = 0;
+    
     token.approve(this, amountToWitdraw);
+
     token.transferFrom(this, msg.sender, amountToWitdraw);
+
      
  }
 
  
-  function receive() external payable{
+  function receive(uint16 _applicationID) external payable {
  
     require(msg.value > 0);
     
-    StakingLibrary.UserStakeData storage userData = userStakes[msg.sender];
-
-    if(userData.totalSentAmount == 0)
-        userData.lastRewardRoundClaimed = rewardRoundNumber;
-        
-    userData.totalSentAmount += uint96(msg.value);
-    userData.activeUntilDate = uint64(now + 90 days);
-
-    StakingLibrary.UserHistoryData storage historyEntry = userData.history[rewardRoundNumber];
+    StakingLibrary.UserHistoryData memory historyEntry = StakingLibrary.UserHistoryData({amount: uint96(msg.value), date:  uint64(block.timestamp), applicationID: _applicationID});
     
-    historyEntry.amount = userData.totalSentAmount;
-    historyEntry.activeDate = userData.activeUntilDate;
-   
- }
+     userStakes[msg.sender].history.push(historyEntry);
+ 
+  
+  }
  
   function calculateGlobalStakeSize() public view returns(uint size){
      
@@ -169,6 +150,9 @@ function claimRewards() public{
     totalTokenLockedAmount += rewardAmount;
     
     ++rewardRoundNumber;
+    
+    
+    
     nextRewardDate = calculateNextRewardDate();
     
   } 
@@ -179,10 +163,11 @@ function claimRewards() public{
 
     uint currentBalance = address(this).balance;
 
+  
     tokenTrader.tradeTokens.value(currentBalance)(token, this);
 
     totalEthReceived = totalEthReceived.add(currentBalance);
-    
+   
   }
  
  
@@ -191,18 +176,8 @@ function claimRewards() public{
          
     StakingLibrary.UserStakeData storage data = userStakes[msg.sender];
      
-    for(uint32 i = data.lastRewardRoundClaimed; i < rewardRoundNumber; i++ ){
-         
-         
-      StakingLibrary.UserHistoryData storage historyEntry = data.history[i];
-         
-      StakingLibrary.RewardData storage dataForRound = rewards[i];
-         
-      uint reward = historyEntry.amount.div(dataForRound.totalEthReceived).mul(dataForRound.totalReward);
-
-      total = total.add(reward);
-
-    }
+  
+    total = data.currentStakeAmount + rewardCalculator.calculateReward(msg.sender);
      
     numOfUnpaidRewards = rewardRoundNumber-data.lastRewardRoundClaimed;
   }
@@ -225,26 +200,34 @@ function getTotalRewardsForRound(uint32 index) public view returns (uint rewardA
     ethReceived = data.totalEthReceived;
 }
 
- function getUserStakeData() public view returns (uint96 stake, uint96 total, uint64 activeUntilDate){
+ function getUserStakeData(address _user) public view returns (uint96 amount, uint96 lastRewardRoundClaimed, uint lastHistoryEntryOnClaimed, uint numOfHistoryEntries){
  
     StakingLibrary.UserStakeData storage stakeData = userStakes[msg.sender];
     
-    stake = stakeData.currentStakeAmount;
-    total = stakeData.totalSentAmount;
-    activeUntilDate = stakeData.activeUntilDate;
+    amount = stakeData.currentStakeAmount;
+    lastRewardRoundClaimed = stakeData.lastRewardRoundClaimed;
+    lastHistoryEntryOnClaimed = stakeData.lastHistoryEntryOnClaimed;
+    numOfHistoryEntries = stakeData.history.length;
+
+ }
+ 
+ function getUserHistoryData(address _user, uint index) public view returns (uint96 amount,uint64 date,uint16 applicationID) {
      
+       StakingLibrary.UserStakeData storage stakeData = userStakes[_user];
+
+       require(index < stakeData.history.length );
+       
+  
+       amount = stakeData.history[index].amount;
+       date = stakeData.history[index].date;
+       applicationID = stakeData.history[index].applicationID;
  }
 
 
-  function calculateWithdrawalTimeframeEndDate(uint activeUntilDate) internal view  returns(uint){
-      return activeUntilDate +(60*60*24*REWARD_ROUND_DURATION);
-  }
-
   function calculateNextRewardDate() internal view returns(uint){
       
-      uint currentDate = now;
 
-      return currentDate+(60*60*24*REWARD_ROUND_DURATION);
+      return block.timestamp+REWARD_ROUND_DURATION;
   }
 
 

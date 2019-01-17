@@ -1,5 +1,5 @@
 
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 
 library StakingLibrary {
@@ -7,10 +7,9 @@ library StakingLibrary {
   struct UserStakeData{
     
     uint96 currentStakeAmount;
-    uint96 totalSentAmount;
-    uint64 activeUntilDate;
     uint32 lastRewardRoundClaimed;
-    mapping(uint32 => UserHistoryData) history;
+    uint lastHistoryEntryOnClaimed;
+    UserHistoryData[] history;
   }
  
   struct RewardData{
@@ -23,6 +22,7 @@ library StakingLibrary {
   struct UserHistoryData{
      
       uint96 amount;
-      uint64 activeDate;
+      uint64 date;
+      uint16 applicationID;
   }
 }
