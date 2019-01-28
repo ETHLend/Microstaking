@@ -2,10 +2,10 @@
 pragma solidity ^0.4.18;
 
 import "./vendor/KyberNetwork.sol";
-import "./interfaces/TokenTrader.sol";
+import "./interfaces/ITokenTrader.sol";
 
 
-contract KyberTokenTrader is TokenTrader{
+contract KyberTokenTrader is ITokenTrader{
   
     KyberNetworkProxy public kyberContract ;
     

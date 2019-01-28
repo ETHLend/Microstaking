@@ -9,14 +9,15 @@ library StakingLibrary {
     uint96 currentStakeAmount;
     uint32 lastRewardRoundClaimed;
     uint lastHistoryEntryOnClaimed;
-    UserHistoryData[] history;
+    mapping(uint => UserHistoryData) history;
+    uint numOfHistoryEntries;
   }
  
   struct RewardData{
      
     uint totalReward;
     uint totalEthReceived;
-    uint rewardDate;
+    uint64 rewardDate;
   }
   
   struct UserHistoryData{

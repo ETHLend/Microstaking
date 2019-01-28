@@ -74,7 +74,7 @@ contract StakingContract is Ownable, IStakingContract {
  }
 
 
-function claimRewards() public{
+function claimRewards() public returns(uint){
     
      StakingLibrary.UserStakeData storage userData = userStakes[msg.sender];
 
@@ -82,10 +82,11 @@ function claimRewards() public{
      
      
      userData.currentStakeAmount += pendingReward;
-     userData.lastHistoryEntryOnClaimed = userData.history.length-1;
+     userData.lastHistoryEntryOnClaimed = userData.numOfHistoryEntries-1;
  
      userData.lastRewardRoundClaimed = rewardRoundNumber;
-     
+
+    return userData.currentStakeAmount;   
  }
  
  function withdrawStake() public {
@@ -112,14 +113,19 @@ function claimRewards() public{
  }
 
  
-  function receive(uint16 _applicationID) external payable {
+  function receive(address _sender, uint16 _applicationID) external payable {
  
     require(msg.value > 0);
     
-    StakingLibrary.UserHistoryData memory historyEntry = StakingLibrary.UserHistoryData({amount: uint96(msg.value), date:  uint64(block.timestamp), applicationID: _applicationID});
+     StakingLibrary.UserStakeData storage userData = userStakes[_sender];
+  
+    StakingLibrary.UserHistoryData storage historyEntry = userData.history[userData.numOfHistoryEntries];
     
-     userStakes[msg.sender].history.push(historyEntry);
- 
+    historyEntry.amount = uint96(msg.value);
+    historyEntry.date = uint64(block.timestamp);
+    historyEntry.applicationID = _applicationID;
+
+    ++userData.numOfHistoryEntries;
   
   }
  
@@ -145,7 +151,7 @@ function claimRewards() public{
     
     rewardData.totalReward = rewardAmount;
     rewardData.totalEthReceived = totalEthReceived;
-    rewardData.rewardDate = now;
+    rewardData.rewardDate = uint64(block.timestamp);
     
     totalTokenLockedAmount += rewardAmount;
     
@@ -188,6 +194,15 @@ function claimRewards() public{
      return rewardRoundNumber;
  }
 
+ function getRewardRoundDate(uint rewardIndex) public view returns(uint64) {
+  
+    require(rewardIndex < rewardRoundNumber);
+
+     StakingLibrary.RewardData storage data = rewards[rewardIndex];
+          
+    return data.rewardDate;
+ }
+
   
    
 function getTotalRewardsForRound(uint32 index) public view returns (uint rewardAmount, uint ethReceived){
@@ -202,20 +217,21 @@ function getTotalRewardsForRound(uint32 index) public view returns (uint rewardA
 
  function getUserStakeData(address _user) public view returns (uint96 amount, uint96 lastRewardRoundClaimed, uint lastHistoryEntryOnClaimed, uint numOfHistoryEntries){
  
-    StakingLibrary.UserStakeData storage stakeData = userStakes[msg.sender];
+    StakingLibrary.UserStakeData storage stakeData = userStakes[_user];
     
     amount = stakeData.currentStakeAmount;
     lastRewardRoundClaimed = stakeData.lastRewardRoundClaimed;
     lastHistoryEntryOnClaimed = stakeData.lastHistoryEntryOnClaimed;
-    numOfHistoryEntries = stakeData.history.length;
+    numOfHistoryEntries = stakeData.numOfHistoryEntries;
 
  }
  
+
  function getUserHistoryData(address _user, uint index) public view returns (uint96 amount,uint64 date,uint16 applicationID) {
      
        StakingLibrary.UserStakeData storage stakeData = userStakes[_user];
 
-       require(index < stakeData.history.length );
+       require(index < stakeData.numOfHistoryEntries );
        
   
        amount = stakeData.history[index].amount;
