@@ -33,5 +33,15 @@ module.exports = {
       gasPrice: 7000000000 //7 GWei
     },
 
+    mainnet: {
+      provider: function () {
+        return new HDWalletProvider(mnemonic, "https://kovan.infura.io/nq321ByKuruIz2XqTGd5");
+      },
+      network_id: '1',
+      gas: 3000000,
+      gasPrice: 7000000000 //7 GWei
+    },
+
+
   }
 }

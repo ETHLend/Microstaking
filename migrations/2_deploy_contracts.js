@@ -1,5 +1,4 @@
-var token = artifacts.require("MockERC20");
-var tokenTrader = artifacts.require("MockTokenTrader");
+var tokenTrader = artifacts.require("KyberTokenTrader");
 var stakingContract = artifacts.require("StakingContract");
 var stakingLibrary = artifacts.require("StakingLibrary");
 
@@ -7,14 +6,16 @@ module.exports = async function (deployer) {
 
 
     deployer.then(async () => {
-        let tokenAddress = "0xb5223aa2443361994ed9d786308dffceefb8d20b";
+      
+        let tokenAddress = "0x80fB784B7eD66730e8b1DBd9820aFD29931aab03";
 
-        await deployer.deploy(tokenTrader);
+        let kyberNetworkProxyAddress = "0x818E6FECD516Ecc3849DAf6845e3EC868087B755";
+
+        await deployer.deploy(tokenTrader, kyberNetworkProxyAddress);
 
         await tokenTrader.deployed();
 
         console.log("Deploying staking smart contract, token address: " + tokenAddress + ", trader address: " + tokenTrader.address);
-
 
         await deployer.deploy(stakingLibrary);
 
